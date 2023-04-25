@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "123609874806",
+    "project_id": "sungel-app-78b97",
+    "storage_bucket": "sungel-app-78b97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123609874806:android:db41b3fc62359831027a57",
+        "android_client_info": {
+          "package_name": "com.example.sungel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123609874806-93ttuvp7q5and72ktvq05jnjael27inu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEP7l3nvHPmYH_v2UKlgSVVz1lrNUhGAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123609874806-93ttuvp7q5and72ktvq05jnjael27inu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "123609874806-l7nmsb609siqh2dqe09nal6pq17ht5oi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sungelApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
