@@ -27,10 +27,6 @@ class _HomeBodyState extends State<HomeBody> {
                 decoration: const InputDecoration(
                   hintText: '今月の目標',
                 ),
-                onChanged: (value) {
-                  textController.text = value;
-                  setState(() {});
-                },
               ),
             ),
           ],

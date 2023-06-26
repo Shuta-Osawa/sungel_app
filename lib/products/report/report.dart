@@ -13,16 +13,16 @@ class _PaceState extends State<Pace> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 20),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8,vertical: 20),
           child: Card(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(vertical: 16),
               child: Column(
                 children: [
                      Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
+                      children: [
                         Text(
                           '1日必要売上',
                           style:
@@ -38,12 +38,12 @@ class _PaceState extends State<Pace> {
                         ),
                       ],
                     ),
-                  const SizedBox(
+                  SizedBox(
                     height: 12,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
+                    children: [
                       Text(
                         'ペース',
                         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

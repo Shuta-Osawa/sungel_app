@@ -5,12 +5,15 @@ class AchievementButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.countValue,
-    required this.onPressed,
+    required this.onDecrement,
+    required this.onIncrement,
+
   });
 
   final String title;
-  final String countValue;
-  final VoidCallback onPressed;
+  final int countValue;
+  final VoidCallback onDecrement;
+  final VoidCallback onIncrement;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +35,14 @@ class AchievementButton extends StatelessWidget {
           ),
           child: IconButton(
             icon: const Icon(Icons.remove),
-            onPressed: onPressed,
+            onPressed: onDecrement,
           ),
         ),
         const SizedBox(
           width: 8,
         ),
         Text(
-          countValue,
+          '$countValue',
           style: const TextStyle(fontSize: 24),
         ),
         const SizedBox(
@@ -56,7 +59,7 @@ class AchievementButton extends StatelessWidget {
           ),
           child: IconButton(
             icon: const Icon(Icons.add),
-            onPressed: onPressed,
+            onPressed: onIncrement,
           ),
         ),
       ],
