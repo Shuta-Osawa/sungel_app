@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 
-import './date_picker_bottom_sheet.dart';
 
 
 class EditSalesPage extends StatefulWidget {
@@ -12,6 +12,10 @@ class EditSalesPage extends StatefulWidget {
   @override
   State<EditSalesPage> createState() => _EditSalesPageState();
 }
+
+const String MIN_DATETIME = '2010-05-12 10:47:00';
+const String MAX_DATETIME = '2030-11-25 22:45:10';
+const String INIT_DATETIME = '2019-05-17 18:13:15';
 
 class _EditSalesPageState extends State<EditSalesPage> {
   // TODO(柊太): initStateでコントローラーに入れる
@@ -29,6 +33,13 @@ class _EditSalesPageState extends State<EditSalesPage> {
   var salesConstruction = '';
   var salesAppointer = '';
   var salesCloser = '';
+  final bool _showTitle = true;
+
+  final String _format = 'yyyy-MMMM-dd';
+  final TextEditingController _formatCtrl = TextEditingController();
+
+  final DateTimePickerLocale _locale = DateTimePickerLocale.en_us;
+  DateTime? _dateTime;
 
   final List<String> commodity = [
     '太陽光',
@@ -51,6 +62,8 @@ class _EditSalesPageState extends State<EditSalesPage> {
     constructionController.text = widget.item['construction'] ?? '';
     contractController.text = widget.item['contract'] ?? '';
     selectedCommodity = List<String>.from(widget.item['commodity'] ?? []);
+    _formatCtrl.text = _format;
+    _dateTime = DateTime.parse(INIT_DATETIME);
   }
 
   @override
@@ -170,10 +183,29 @@ class _EditSalesPageState extends State<EditSalesPage> {
                       height: 28,
                       child: FilledButton.icon(
                         onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const DatePickerBottomSheet();
-                          }));
+                          DatePicker.showDatePicker(
+                            context,
+                            onMonthChangeStartWithFirstDate: true,
+                            pickerTheme: DateTimePickerTheme(
+                              showTitle: _showTitle,
+                              confirm: const Text('custom Done', style: TextStyle(color: Colors.red)),
+                            ),
+                            minDateTime: DateTime.parse(MIN_DATETIME),
+                            maxDateTime: DateTime.parse(MAX_DATETIME),
+                            initialDateTime: _dateTime,
+                            dateFormat: _format,
+                            locale: _locale,
+                            onChange: (dateTime, List<int> index) {
+                              setState(() {
+                                _dateTime = dateTime;
+                              });
+                            },
+                            onConfirm: (dateTime, List<int> index) {
+                              setState(() {
+                                _dateTime = dateTime;
+                              });
+                            },
+                          );
                         },
                         label: const Text(
                           '契約日',
@@ -199,10 +231,29 @@ class _EditSalesPageState extends State<EditSalesPage> {
                       height: 28,
                       child: FilledButton.icon(
                         onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const DatePickerBottomSheet();
-                          }));
+                          DatePicker.showDatePicker(
+                            context,
+                            onMonthChangeStartWithFirstDate: true,
+                            pickerTheme: DateTimePickerTheme(
+                              showTitle: _showTitle,
+                              confirm: const Text('custom Done', style: TextStyle(color: Colors.red)),
+                            ),
+                            minDateTime: DateTime.parse(MIN_DATETIME),
+                            maxDateTime: DateTime.parse(MAX_DATETIME),
+                            initialDateTime: _dateTime,
+                            dateFormat: _format,
+                            locale: _locale,
+                            onChange: (dateTime, List<int> index) {
+                              setState(() {
+                                _dateTime = dateTime;
+                              });
+                            },
+                            onConfirm: (dateTime, List<int> index) {
+                              setState(() {
+                                _dateTime = dateTime;
+                              });
+                            },
+                          );
                         },
                         label: const Text(
                           '現調日',
@@ -228,10 +279,29 @@ class _EditSalesPageState extends State<EditSalesPage> {
                       height: 28,
                       child: FilledButton.icon(
                         onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const DatePickerBottomSheet();
-                          }));
+                          DatePicker.showDatePicker(
+                            context,
+                            onMonthChangeStartWithFirstDate: true,
+                            pickerTheme: DateTimePickerTheme(
+                              showTitle: _showTitle,
+                              confirm: const Text('custom Done', style: TextStyle(color: Colors.red)),
+                            ),
+                            minDateTime: DateTime.parse(MIN_DATETIME),
+                            maxDateTime: DateTime.parse(MAX_DATETIME),
+                            initialDateTime: _dateTime,
+                            dateFormat: _format,
+                            locale: _locale,
+                            onChange: (dateTime, List<int> index) {
+                              setState(() {
+                                _dateTime = dateTime;
+                              });
+                            },
+                            onConfirm: (dateTime, List<int> index) {
+                              setState(() {
+                                _dateTime = dateTime;
+                              });
+                            },
+                          );
                         },
                         label: const Text(
                           '工事日',

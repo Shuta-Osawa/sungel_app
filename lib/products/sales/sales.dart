@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sungel_app/products/sales/edit_sales_page.dart';
+import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 
-import './date_picker_bottom_sheet.dart';
 
 class Sales extends StatefulWidget {
   const Sales({Key? key}) : super(key: key);
@@ -11,6 +11,9 @@ class Sales extends StatefulWidget {
   @override
   State<Sales> createState() => _SalesState();
 }
+const String MIN_DATETIME = '2010-05-12 10:47:00';
+const String MAX_DATETIME = '2030-11-25 22:45:10';
+const String INIT_DATETIME = '2019-05-17 18:13:15';
 
 class _SalesState extends State<Sales> {
   final nameController = TextEditingController();
@@ -27,6 +30,13 @@ class _SalesState extends State<Sales> {
   var salesConstruction = '';
   var salesAppointer = '';
   var salesCloser = '';
+  final bool _showTitle = true;
+
+  final String _format = 'yyyy-MMMM-dd';
+  final TextEditingController _formatCtrl = TextEditingController();
+
+  final DateTimePickerLocale _locale = DateTimePickerLocale.en_us;
+  DateTime? _dateTime;
 
   Stream<List<Map<String, dynamic>>> getSales() {
     return FirebaseFirestore.instance
@@ -158,10 +168,23 @@ class _SalesState extends State<Sales> {
                     height: 28,
                     child: FilledButton.icon(
                       onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const DatePickerBottomSheet();
-                        }));
+                        DatePicker.showDatePicker(
+                          context,
+                          onMonthChangeStartWithFirstDate: true,
+                          pickerTheme: DateTimePickerTheme(
+                            showTitle: _showTitle,
+                            confirm: const Text('custom Done', style: TextStyle(color: Colors.red)),
+                          ),
+                          minDateTime: DateTime.parse(MIN_DATETIME),
+                          maxDateTime: DateTime.parse(MAX_DATETIME),
+                          dateFormat: _format,
+                          locale: _locale,
+                          onConfirm: (investigationController, List<int> index) {
+                            setState(() {
+                              _dateTime = investigationController;
+                            });
+                          },
+                        );
                       },
                       label: const Text(
                         '契約日',
@@ -187,10 +210,24 @@ class _SalesState extends State<Sales> {
                     height: 28,
                     child: FilledButton.icon(
                       onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const DatePickerBottomSheet();
-                        }));
+                        DatePicker.showDatePicker(
+                          context,
+                          onMonthChangeStartWithFirstDate: true,
+                          pickerTheme: DateTimePickerTheme(
+                            showTitle: _showTitle,
+                            confirm: const Text('custom Done', style: TextStyle(color: Colors.red)),
+                          ),
+                          minDateTime: DateTime.parse(MIN_DATETIME),
+                          maxDateTime: DateTime.parse(MAX_DATETIME),
+                          initialDateTime: _dateTime,
+                          dateFormat: _format,
+                          locale: _locale,
+                          onConfirm: (constructionController, List<int> index) {
+                            setState(() {
+                              _dateTime = constructionController;
+                            });
+                          },
+                        );
                       },
                       label: const Text(
                         '現調日',
@@ -216,10 +253,29 @@ class _SalesState extends State<Sales> {
                     height: 28,
                     child: FilledButton.icon(
                       onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const DatePickerBottomSheet();
-                        }));
+                        DatePicker.showDatePicker(
+                          context,
+                          onMonthChangeStartWithFirstDate: true,
+                          pickerTheme: DateTimePickerTheme(
+                            showTitle: _showTitle,
+                            confirm: const Text('custom Done', style: TextStyle(color: Colors.red)),
+                          ),
+                          minDateTime: DateTime.parse(MIN_DATETIME),
+                          maxDateTime: DateTime.parse(MAX_DATETIME),
+                          initialDateTime: _dateTime,
+                          dateFormat: _format,
+                          locale: _locale,
+                          onChange: (dateTime, List<int> index) {
+                            setState(() {
+                              _dateTime = dateTime;
+                            });
+                          },
+                          onConfirm: (contractController, List<int> index) {
+                            setState(() {
+                              _dateTime = contractController;
+                            });
+                          },
+                        );
                       },
                       label: const Text(
                         '工事日',
@@ -307,6 +363,13 @@ class _SalesState extends State<Sales> {
   }
 
   final List<String> salesList = <String>[''];
+
+  @override
+  void initState() {
+    super.initState();
+    _formatCtrl.text = _format;
+    _dateTime = DateTime.parse(INIT_DATETIME);
+  }
 
   @override
   Widget build(BuildContext context) {
